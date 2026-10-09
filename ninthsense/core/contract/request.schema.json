@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://onboard.9thsense.ai/schemas/request.schema.json",
+  "title": "Document collection request",
+  "description": "What the HRMS returns for a link code: branding, state and the documents to collect. Provider-neutral and HRMS-neutral: no HRMS field names, no assumption about which provider reads the documents. Provider credentials never appear here.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ref",
+    "hrms",
+    "goal_key",
+    "stage",
+    "catalogue_version",
+    "state",
+    "steps",
+    "completion"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Checked against the portal's supported set. An unsupported version is an error page, never a guess.",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "ref": {
+      "type": "string",
+      "description": "The hrms's reference for this onboarding. Doubles as the callback Idempotency-Key; prefixed with the deployment's tenant_slug, it is the provider's client_reference_id.",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "goal_key": {
+      "description": "Which stage of the hiring flow this collection belongs to. The portal looks this up in its own goals map and passes the resulting provider goal id to the provider; an unmatched key aborts the session. Naming a stage is the hrms's to do, deciding what the stage means is the portal's, and neither can steer the other.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_]{0,63}$"
+    },
+    "stage": {
+      "description": "Human-readable label for the same stage, echoed in the completion payload and otherwise unused.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "catalogue_version": {
+      "description": "Identifies the document-type fixture set the hrms shipped with. Echoed in the completion payload, and logged once per collection so that a drift between the two systems shows up as a log line rather than as classification failures nobody can explain.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "hrms": {
+      "type": "object",
+      "required": ["system", "instance"],
+      "properties": {
+        "system": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instance": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        }
+      },
+      "additionalProperties": false
+    },
+    "state": {
+      "enum": ["open", "submitted", "expired", "revoked"]
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "branding": {
+      "type": "object",
+      "properties": {
+        "org_name": {
+          "description": "Bounded only so a malformed response cannot blow up a log line or the callback payload. Display truncation is the UI's job, never a reason to reject the collection.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "logo_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "accent_color": {
+          "type": "string",
+          "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+        },
+        "support_email": {
+          "type": "string",
+          "format": "email"
+        }
+      },
+      "additionalProperties": false
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "display_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      },
+      "additionalProperties": false
+    },
+    "copy": {
+      "type": "object",
+      "description": "Flat map of overrides for the portal's default strings. Values interpolate {placeholder} tokens.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "allow_replace_before_submit": {
+          "type": "boolean"
+        },
+        "classifier_confidence_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "on_classifier_disagreement": {
+          "enum": ["warn", "accept", "block"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "steps": {
+      "type": "array",
+      "description": "An array so eSign and KYC are additive later. v1 handles exactly one step, of type document_collection.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/requestedDocument"
+            }
+          },
+          "replaced_verification_document_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "Provider document ids the hrms once held and has since replaced. Never shown as unfiled again."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "completion": {
+      "type": "object",
+      "required": ["callback_path"],
+      "properties": {
+        "callback_path": {
+          "description": "Where the completion payload is posted, appended to the hrms base URL from the portal's own config — never to a host named here. Confined to the portal_api namespace: the payload carries a candidate's extracted identity fields, so the path may not name another whitelisted method, escape upwards, or carry a query or fragment.",
+          "type": "string",
+          "pattern": "^/api/method/ninthsense\\.[A-Za-z0-9._]+$",
+          "not": { "pattern": "\\.\\." }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^x-": {
+      "description": "Echoed untouched in the completion payload and otherwise ignored."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "requestedDocument": {
+      "type": "object",
+      "required": ["document_code", "label", "accept", "max_bytes"],
+      "properties": {
+        "document_code": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_]{0,63}$",
+          "description": "The HRMS's stable code for this kind of document, e.g. aadhaar_front. Names the requestedDocument on every upload and in the completion payload, so a collection lists each code once; the portal maps the provider's classifier labels onto these codes."
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "group": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "accept": {
+          "type": "array",
+          "description": "File extensions. Intersected server-side with the provider's MIME whitelist; anything outside it is warned about and dropped.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^\\.[a-z0-9]+$"
+          }
+        },
+        "max_bytes": {
+          "type": "integer",
+          "description": "Clamped to min(max_bytes, 20 MB) \u2014 the provider's hard cap.",
+          "minimum": 1
+        },
+        "help": {
+          "type": "string",
+          "maxLength": 400
+        },
+        "verification_document_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The provider document id the hrms currently holds for this requestedDocument. Lets the page recover which bulk upload was filed where."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

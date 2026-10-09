@@ -1,0 +1,29 @@
+{
+ "app": "hrms",
+ "creation": "2026-10-06 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon": "file-badge",
+ "icon_type": "Link",
+ "idx": 0,
+ "label": "Document Collection",
+ "link_to": "Document Collection",
+ "link_type": "Workspace Sidebar",
+ "logo_url": "/assets/ninthsense/icons/desktop_icons/solid/document_collection.svg",
+ "modified": "2026-10-08 12:00:00.000000",
+ "modified_by": "Administrator",
+ "name": "Document Collection",
+ "owner": "Administrator",
+ "parent_icon": "Frappe HR",
+ "restrict_removal": 0,
+ "roles": [
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "HR Manager"
+  }
+ ],
+ "standard": 1
+}

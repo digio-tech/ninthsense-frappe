@@ -1,0 +1,275 @@
+{
+  "schema_version": "2.0",
+  "ref": "DCR-2026-0001.Xb3kQ9vT2mLp8RnW",
+  "goal_key": "onboarding",
+  "stage": "Onboarding",
+  "catalogue_version": 1,
+  "status": "completed",
+  "completed_at": "2026-10-07T10:15:00.000Z",
+  "steps": [
+    {
+      "id": "docs",
+      "type": "document_collection",
+      "provider": {
+        "name": "9thsense",
+        "session_id": "mock_6f1c2a4e-8d3b-4c7a-9e21-5b0d7f3a9c11",
+        "case_status": "completed"
+      },
+      "result": {
+        "cross_match": "passed",
+        "checks": [
+          {
+            "label": "aadhaar_front",
+            "document_type": "aadhaar_front",
+            "status": "done"
+          },
+          {
+            "label": "pan_card",
+            "document_type": "pan_card",
+            "status": "done"
+          },
+          {
+            "label": "resume",
+            "document_type": "resume",
+            "status": "done"
+          },
+          {
+            "label": "graduation_certificate",
+            "document_type": "graduation_certificate",
+            "status": "done"
+          },
+          {
+            "label": "cancelled_cheque",
+            "document_type": "cancelled_cheque",
+            "status": "done"
+          },
+          {
+            "label": "latest_pay_slip",
+            "document_type": "latest_pay_slip",
+            "status": "done"
+          },
+          {
+            "label": "bank_statement",
+            "document_type": "bank_statement",
+            "status": "done"
+          },
+          {
+            "label": "passport",
+            "document_type": "passport",
+            "status": "done"
+          }
+        ]
+      },
+      "documents": [
+        {
+          "document_code": "aadhaar_front",
+          "verification_document_id": "mockdoc_00000000-0000-4000-8000-000000000001",
+          "doc_index": 0,
+          "detected_document_type": "aadhaar_front",
+          "is_detected_type_expected": true,
+          "confidence": 0.96,
+          "low_confidence": false,
+          "file_name": "aadhaar_front.jpg",
+          "mime_type": "image/jpeg",
+          "size_bytes": 20480,
+          "status": "done",
+          "extracted": {
+            "name": "Asha Rani Verma",
+            "gender": "F",
+            "date_of_birth": "1996-04-18",
+            "aadhaar_number": "999988887777"
+          }
+        },
+        {
+          "document_code": "pan_card",
+          "verification_document_id": "mockdoc_00000000-0000-4000-8000-000000000002",
+          "doc_index": 1,
+          "detected_document_type": "pan_card",
+          "is_detected_type_expected": true,
+          "confidence": 0.95,
+          "low_confidence": false,
+          "file_name": "pan_card.png",
+          "mime_type": "image/png",
+          "size_bytes": 20481,
+          "status": "done",
+          "extracted": {
+            "name": "Asha Verma",
+            "date_of_birth": "1996-04-18",
+            "pan_number": "ABCPV1234F",
+            "father_name": "Ravi Verma"
+          }
+        },
+        {
+          "document_code": "resume",
+          "verification_document_id": "mockdoc_00000000-0000-4000-8000-000000000003",
+          "doc_index": 2,
+          "detected_document_type": "resume",
+          "is_detected_type_expected": true,
+          "confidence": 0.9,
+          "low_confidence": false,
+          "file_name": "resume.pdf",
+          "mime_type": "application/pdf",
+          "size_bytes": 20482,
+          "status": "done",
+          "extracted": {
+            "full_name": "Asha Verma",
+            "phone": "+91 90000 00001",
+            "email": "asha.verma@example.com",
+            "current_address": "12 Sample Street, Indiranagar, Bengaluru 560038",
+            "marital_status": "Single",
+            "current_employer": "Digio India",
+            "current_designation": "Software Engineer",
+            "total_experience_years": "4"
+          }
+        },
+        {
+          "document_code": "graduation_certificate",
+          "verification_document_id": "mockdoc_00000000-0000-4000-8000-000000000004",
+          "doc_index": 3,
+          "detected_document_type": "graduation_certificate",
+          "is_detected_type_expected": true,
+          "confidence": 0.89,
+          "low_confidence": false,
+          "file_name": "graduation_certificate.jpg",
+          "mime_type": "image/jpeg",
+          "size_bytes": 20483,
+          "status": "done",
+          "extracted": {
+            "name": "Asha Verma",
+            "institution": "Sample Institute of Technology",
+            "degree": "B.E. Computer Science",
+            "year_of_passing": "2018",
+            "percentage": "82.5"
+          }
+        },
+        {
+          "document_code": "cancelled_cheque",
+          "verification_document_id": "mockdoc_00000000-0000-4000-8000-000000000005",
+          "doc_index": 4,
+          "detected_document_type": "cancelled_cheque",
+          "is_detected_type_expected": true,
+          "confidence": 0.91,
+          "low_confidence": false,
+          "file_name": "cancelled_cheque.jpg",
+          "mime_type": "image/jpeg",
+          "size_bytes": 20484,
+          "status": "done",
+          "extracted": {
+            "account_holder": "Asha Verma",
+            "account_number": "50100000000001",
+            "ifsc_code": "HDFC0000001",
+            "bank_name": "HDFC Bank",
+            "micr_code": "560240001"
+          }
+        },
+        {
+          "document_code": "latest_pay_slip",
+          "verification_document_id": "mockdoc_00000000-0000-4000-8000-000000000006",
+          "doc_index": 5,
+          "detected_document_type": "latest_pay_slip",
+          "is_detected_type_expected": true,
+          "confidence": 0.88,
+          "low_confidence": false,
+          "file_name": "latest_pay_slip.pdf",
+          "mime_type": "application/pdf",
+          "size_bytes": 20485,
+          "status": "done",
+          "extracted": {
+            "employee_name": "Asha Verma",
+            "employer_name": "Digio India",
+            "designation": "Software Engineer",
+            "pf_number": "KA/BLR/0000001/000/0000001",
+            "pan_number": "ABCPV1234F",
+            "bank_account": "50100000000001",
+            "bank_name": "HDFC Bank"
+          }
+        },
+        {
+          "document_code": "bank_statement",
+          "verification_document_id": "mockdoc_00000000-0000-4000-8000-000000000007",
+          "doc_index": 6,
+          "detected_document_type": "bank_statement",
+          "is_detected_type_expected": true,
+          "confidence": 0.87,
+          "low_confidence": false,
+          "file_name": "bank_statement.pdf",
+          "mime_type": "application/pdf",
+          "size_bytes": 20486,
+          "status": "done",
+          "extracted": {
+            "account_number": "50100000000001",
+            "ifsc_code": "HDFC0000001",
+            "bank_name": "HDFC Bank",
+            "address": "12 Sample Street, Indiranagar, Bengaluru 560038",
+            "mobile_number": "+91 90000 00001",
+            "email": "asha.verma@example.com"
+          }
+        },
+        {
+          "document_code": "passport",
+          "verification_document_id": "mockdoc_00000000-0000-4000-8000-000000000008",
+          "doc_index": 7,
+          "detected_document_type": "passport",
+          "is_detected_type_expected": true,
+          "confidence": 0.93,
+          "low_confidence": false,
+          "file_name": "passport.pdf",
+          "mime_type": "application/pdf",
+          "size_bytes": 20487,
+          "status": "done",
+          "extracted": {
+            "given_name": "Asha",
+            "surname": "Verma",
+            "passport_number": "Z0000001",
+            "date_of_birth": "1996-04-18",
+            "date_of_issue": "2019-06-10",
+            "valid_upto": "2029-06-09",
+            "place_of_issue": "Bengaluru"
+          }
+        }
+      ],
+      "extractions": {
+        "name": "Asha Rani Verma",
+        "gender": "F",
+        "date_of_birth": "1996-04-18",
+        "aadhaar_number": "999988887777",
+        "pan_number": "ABCPV1234F",
+        "father_name": "Ravi Verma",
+        "full_name": "Asha Verma",
+        "phone": "+91 90000 00001",
+        "email": "asha.verma@example.com",
+        "current_address": "12 Sample Street, Indiranagar, Bengaluru 560038",
+        "marital_status": "Single",
+        "current_employer": "Digio India",
+        "current_designation": "Software Engineer",
+        "total_experience_years": "4",
+        "institution": "Sample Institute of Technology",
+        "degree": "B.E. Computer Science",
+        "year_of_passing": "2018",
+        "percentage": "82.5",
+        "account_holder": "Asha Verma",
+        "account_number": "50100000000001",
+        "ifsc_code": "HDFC0000001",
+        "bank_name": "HDFC Bank",
+        "micr_code": "560240001",
+        "employee_name": "Asha Verma",
+        "employer_name": "Digio India",
+        "designation": "Software Engineer",
+        "pf_number": "KA/BLR/0000001/000/0000001",
+        "bank_account": "50100000000001",
+        "address": "12 Sample Street, Indiranagar, Bengaluru 560038",
+        "mobile_number": "+91 90000 00001",
+        "given_name": "Asha",
+        "surname": "Verma",
+        "passport_number": "Z0000001",
+        "date_of_issue": "2019-06-10",
+        "valid_upto": "2029-06-09",
+        "place_of_issue": "Bengaluru"
+      },
+      "missing_documents": []
+    }
+  ],
+  "x-hrms": {
+    "application": "DCR-2026-0001"
+  }
+}

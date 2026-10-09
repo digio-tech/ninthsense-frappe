@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0",
+  "ref": "DCR-2026-0001.Xb3kQ9vT2mLp8RnW",
+  "hrms": {
+    "system": "frappe-hrms",
+    "instance": "https://hr.example.com"
+  },
+  "goal_key": "onboarding",
+  "stage": "Onboarding",
+  "catalogue_version": 1,
+  "state": "open",
+  "expires_at": "2026-10-21T10:00:00+05:30",
+  "branding": {
+    "org_name": "Digio India",
+    "logo_url": "https://hr.example.com/files/logo.png",
+    "accent_color": "#1a73e8",
+    "support_email": "hr@example.com"
+  },
+  "subject": {
+    "display_name": "Asha"
+  },
+  "features": {
+    "allow_replace_before_submit": true,
+    "on_classifier_disagreement": "warn"
+  },
+  "steps": [
+    {
+      "id": "docs",
+      "type": "document_collection",
+      "documents": [
+        {
+          "document_code": "aadhaar_front",
+          "label": "Aadhaar Card Front",
+          "order": 1,
+          "mandatory": true,
+          "accept": [
+            ".pdf",
+            ".jpeg",
+            ".jpg",
+            ".png"
+          ],
+          "max_bytes": 3145728,
+          "group": "Identity",
+          "help": "The side showing your photo, name and date of birth.",
+          "verification_document_id": "mockdoc_00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "document_code": "resume",
+          "label": "Resume",
+          "order": 3,
+          "mandatory": true,
+          "accept": [
+            ".pdf"
+          ],
+          "max_bytes": 3145728,
+          "group": "Employment"
+        }
+      ],
+      "replaced_verification_document_ids": [
+        "mockdoc_00000000-0000-4000-8000-000000000099"
+      ]
+    }
+  ],
+  "completion": {
+    "callback_path": "/api/method/ninthsense.document_collection.portal_api.store_verification"
+  },
+  "x-hrms": {
+    "application": "DCR-2026-0001"
+  },
+  "unknown_field": true
+}

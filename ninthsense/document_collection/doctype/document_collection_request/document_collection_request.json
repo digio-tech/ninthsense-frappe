@@ -1,0 +1,321 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "naming_series:",
+ "creation": "2026-10-07 10:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "summary_section",
+  "summary_html",
+  "status",
+  "verification_result",
+  "verification_case_id",
+  "documents_received_on",
+  "extraction_error",
+  "documents_section",
+  "documents_html",
+  "requested_documents",
+  "extracted_section",
+  "extracted_html",
+  "extractions",
+  "fill_section",
+  "fill_html",
+  "fill_results",
+  "last_fill_on",
+  "details_section",
+  "employee_onboarding",
+  "onboarding_name",
+  "template",
+  "job_applicant",
+  "employee",
+  "details_column_break",
+  "candidate_name",
+  "candidate_email",
+  "company",
+  "link_sent_on",
+  "link_expires_on",
+  "link_emailed",
+  "link_code_hash",
+  "link_ref",
+  "link_delivered_on",
+  "replaced_verification_document_ids",
+  "verification_response"
+ ],
+ "fields": [
+  {
+   "default": "DCR-.YYYY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "DCR-.YYYY.-.####",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "summary_html",
+   "fieldtype": "HTML",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Link Sent\nData Received\nCompleted\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_result",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Verification Result",
+   "options": "\nPassed\nNeeds Review\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_case_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Verification Case Id",
+   "read_only": 1
+  },
+  {
+   "fieldname": "documents_received_on",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "Documents Received On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "extraction_error",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Extraction Error",
+   "read_only": 1
+  },
+  {
+   "fieldname": "documents_section",
+   "fieldtype": "Section Break",
+   "label": "Documents"
+  },
+  {
+   "fieldname": "documents_html",
+   "fieldtype": "HTML",
+   "label": "Documents"
+  },
+  {
+   "fieldname": "requested_documents",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Requested Documents",
+   "options": "Requested Document",
+   "read_only": 1
+  },
+  {
+   "fieldname": "extracted_section",
+   "fieldtype": "Section Break",
+   "label": "What 9thSense read"
+  },
+  {
+   "fieldname": "extracted_html",
+   "fieldtype": "HTML",
+   "label": "What 9thSense Read"
+  },
+  {
+   "fieldname": "extractions",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Extractions",
+   "options": "Document Extraction",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fill_section",
+   "fieldtype": "Section Break",
+   "label": "Fill report"
+  },
+  {
+   "fieldname": "fill_html",
+   "fieldtype": "HTML",
+   "label": "Fill Report"
+  },
+  {
+   "fieldname": "fill_results",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Fill Results",
+   "options": "Employee Fill Result",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_fill_on",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "Last Fill On",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "employee_onboarding",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee Onboarding",
+   "options": "Employee Onboarding",
+   "read_only": 1,
+   "search_index": 1,
+   "unique": 1
+  },
+  {
+   "depends_on": "eval:!doc.employee_onboarding",
+   "fieldname": "onboarding_name",
+   "fieldtype": "Data",
+   "label": "Onboarding Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "template",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Template",
+   "options": "Document Collection Template",
+   "read_only": 1
+  },
+  {
+   "fieldname": "job_applicant",
+   "fieldtype": "Link",
+   "label": "Job Applicant",
+   "options": "Job Applicant",
+   "read_only": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "details_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "candidate_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Candidate Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "candidate_email",
+   "fieldtype": "Data",
+   "label": "Candidate Email",
+   "options": "Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "link_sent_on",
+   "fieldtype": "Datetime",
+   "label": "Link Sent On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "link_expires_on",
+   "fieldtype": "Datetime",
+   "label": "Link Expires On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "link_emailed",
+   "fieldtype": "Check",
+   "label": "Link Emailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "link_code_hash",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Link Code Hash",
+   "read_only": 1
+  },
+  {
+   "fieldname": "link_ref",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Link Ref",
+   "read_only": 1
+  },
+  {
+   "fieldname": "link_delivered_on",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "Link Delivered On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "replaced_verification_document_ids",
+   "fieldtype": "Code",
+   "hidden": 1,
+   "label": "Replaced Verification Document Ids",
+   "options": "JSON",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_response",
+   "fieldtype": "Code",
+   "hidden": 1,
+   "label": "Verification Response",
+   "options": "JSON",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-10-08 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Document Collection",
+ "name": "Document Collection Request",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "read": 1,
+   "role": "HR User",
+   "write": 1
+  },
+  {
+   "delete": 1,
+   "read": 1,
+   "role": "HR Manager",
+   "write": 1
+  }
+ ],
+ "search_fields": "candidate_name,candidate_email,status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "candidate_name"
+}

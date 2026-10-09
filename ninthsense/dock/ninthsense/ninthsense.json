@@ -1,0 +1,24 @@
+{
+ "app": "ninthsense",
+ "creation": "2026-09-03 18:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Dock",
+ "idx": 0,
+ "items": [
+  {
+   "added": 0,
+   "hidden": 0,
+   "icon": "file-badge",
+   "link_to": "Document Collection",
+   "link_type": "Sidebar",
+   "title": "Document Collection"
+  }
+ ],
+ "modified": "2026-09-09 10:00:00.000000",
+ "modified_by": "Administrator",
+ "mount_on": "hrms",
+ "name": "ninthsense",
+ "owner": "Administrator",
+ "standard": 1,
+ "user": ""
+}

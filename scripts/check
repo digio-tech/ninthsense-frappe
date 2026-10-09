@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Quality gate. Fails on the first failing step.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+BENCH_PY="${BENCH_PY:-$(cd ../.. && pwd)/env/bin/python}"
+if command -v ruff >/dev/null 2>&1; then RUFF=(ruff); else RUFF=(uvx ruff); fi
+
+echo "==> ruff check"
+"${RUFF[@]}" check .
+echo "==> ruff format --check"
+"${RUFF[@]}" format --check .
+echo "==> frappe-free unit tests"
+"$BENCH_PY" -m unittest discover -s ninthsense/core -t .
+echo "==> semgrep (frappe/marketplace rules)"
+# MARKETPLACE_RULES: a frappe/marketplace clone, or its validation/semgrep-rules folder.
+RULES="${MARKETPLACE_RULES:-}"
+if [ -n "$RULES" ] && [ -d "$RULES/validation/semgrep-rules" ]; then RULES="$RULES/validation/semgrep-rules"; fi
+if [ -z "$RULES" ]; then
+	echo "INCOMPLETE: semgrep did not run (MARKETPLACE_RULES not set); this gate is not a full pass"
+	if [ -n "${CI:-}" ]; then exit 1; fi
+elif [ ! -d "$RULES" ]; then
+	echo "MARKETPLACE_RULES is not a folder: $RULES"
+	exit 1
+else
+	if command -v semgrep >/dev/null 2>&1; then SEMGREP=(semgrep); else SEMGREP=(uvx semgrep); fi
+	# The marketplace's own blocking rule (validation/semgrep_check.py): a finding blocks when its
+	# rule sets is_blocking, or its severity is ERROR, CRITICAL or HIGH. Others are advisories.
+	"${SEMGREP[@]}" scan --config "$RULES" --json --quiet . | "$BENCH_PY" -c '
+import json, sys
+results = json.load(sys.stdin)["results"]
+def blocking(f):
+	extra = f.get("extra", {})
+	if extra.get("metadata", {}).get("is_blocking") is True:
+		return True
+	return str(extra.get("severity", "INFO")).upper() in ("ERROR", "CRITICAL", "HIGH")
+blocks = [f for f in results if blocking(f)]
+for f in results:
+	kind = "BLOCKING" if blocking(f) else "advisory"
+	rule = f["check_id"].rsplit(".", 1)[-1]
+	print("  %s: %s:%s %s" % (kind, f["path"], f["start"]["line"], rule))
+print("  %d finding(s), %d blocking" % (len(results), len(blocks)))
+sys.exit(1 if blocks else 0)
+'
+fi

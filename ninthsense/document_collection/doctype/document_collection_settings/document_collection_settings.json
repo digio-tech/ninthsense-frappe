@@ -1,0 +1,66 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-10-07 10:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "portal_url",
+  "callback_secret",
+  "support_email",
+  "portal_accent_color"
+ ],
+ "fields": [
+  {
+   "description": "The 9thSense portal address for this site, e.g. https://portal.example.com. No path.",
+   "fieldname": "portal_url",
+   "fieldtype": "Data",
+   "label": "Portal URL"
+  },
+  {
+   "description": "The 9thSense callback secret for this site. At least 32 characters.",
+   "fieldname": "callback_secret",
+   "fieldtype": "Password",
+   "label": "Callback Secret"
+  },
+  {
+   "description": "Optional. Shown to candidates as the address to write to for help.",
+   "fieldname": "support_email",
+   "fieldtype": "Data",
+   "label": "Support Email",
+   "options": "Email"
+  },
+  {
+   "description": "Optional.",
+   "fieldname": "portal_accent_color",
+   "fieldtype": "Color",
+   "label": "Portal Accent Colour"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-10-08 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Document Collection",
+ "name": "Document Collection Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "role": "HR Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

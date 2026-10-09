@@ -1,0 +1,65 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"ob_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Onboarding</b></span>\",\"col\":12}},{\"id\":\"ob_sc_0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Requests\",\"col\":4}},{\"id\":\"ob_sc_tpl\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Templates\",\"col\":4}},{\"id\":\"ob_sc_1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Document Types\",\"col\":4}},{\"id\":\"ob_sc_2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Settings\",\"col\":4}}]",
+ "creation": "2026-09-03 18:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "file-badge",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Document Collection",
+ "links": [],
+ "modified": "2026-10-08 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Document Collection",
+ "name": "Document Collection",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "HR Manager"
+  }
+ ],
+ "sequence_id": 20.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Requests",
+   "link_to": "Document Collection Request",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Templates",
+   "link_to": "Document Collection Template",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Document Types",
+   "link_to": "Employee Document Type",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "label": "Settings",
+   "link_to": "Document Collection Settings",
+   "type": "DocType"
+  }
+ ],
+ "standard": 1,
+ "title": "Document Collection"
+}

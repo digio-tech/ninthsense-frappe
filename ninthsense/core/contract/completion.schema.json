@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://onboard.9thsense.ai/schemas/completion.schema.json",
+  "title": "Completion payload",
+  "description": "POSTed server-side to hrms.instance + completion.callback_path, authenticated by the token, with header Idempotency-Key: {ref}. Extraction values pass through unchanged \u2014 no renaming, no reshaping. Field mapping belongs in the HRMS.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ref",
+    "goal_key",
+    "stage",
+    "catalogue_version",
+    "status",
+    "completed_at",
+    "steps"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "goal_key": {
+      "description": "The collection's goal_key, echoed unchanged. The resolved provider goal id is deliberately not here: which agent ran is the portal's business, not the hrms's.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_]{0,63}$"
+    },
+    "stage": {
+      "description": "The collection's stage label, echoed unchanged.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "catalogue_version": {
+      "description": "The collection's catalogue_version, echoed unchanged, so the hrms can see which fixture set the answer belongs to.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "description": "The provider's case status, relayed verbatim. review is a normal outcome: documents accepted, case flagged for a human.",
+      "enum": ["completed", "review", "failed"]
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    }
+  },
+  "patternProperties": {
+    "^x-": {
+      "description": "Echoed untouched from the collection."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "step": {
+      "type": "object",
+      "required": ["id", "type", "provider", "documents", "missing_documents"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "object",
+          "required": ["name", "session_id", "case_status"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "session_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "case_status": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "result": {
+          "type": ["object", "array", "string", "number", "boolean", "null"],
+          "description": "The provider's case result, verbatim: whatever JSON it put there, including a list of checks. Relayed unexamined, exactly like a document's extracted."
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/document"
+          }
+        },
+        "extractions": {
+          "type": ["object", "array", "string", "number", "boolean", "null"],
+          "description": "Case-level merged extractions, verbatim: shape as well as content is the provider's, so a list is as valid as an object."
+        },
+        "missing_documents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "document": {
+      "type": "object",
+      "required": ["document_code", "verification_document_id", "status"],
+      "properties": {
+        "document_code": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The requestedDocument's document_code, or \"unfiled\" for a bulk upload the candidate never filed."
+        },
+        "verification_document_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The provider's id for this document."
+        },
+        "doc_index": {
+          "type": ["integer", "null"]
+        },
+        "detected_document_type": {
+          "type": ["string", "null"],
+          "description": "What the provider's classifier said the file is, in the provider's own label. Not the HRMS document code."
+        },
+        "is_detected_type_expected": {
+          "type": ["boolean", "null"],
+          "description": "Whether provider_doc_type matched the requestedDocument's expected type. Null when the requestedDocument declares no provider_doc_type."
+        },
+        "confidence": {
+          "type": ["number", "null"]
+        },
+        "low_confidence": {
+          "type": ["boolean", "null"],
+          "description": "Soft flag: confidence below features.classifier_confidence_threshold. Recorded, never acted on."
+        },
+        "file_name": {
+          "type": ["string", "null"]
+        },
+        "mime_type": {
+          "type": ["string", "null"]
+        },
+        "size_bytes": {
+          "type": ["integer", "null"]
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extracted": {
+          "type": ["object", "array", "string", "number", "boolean", "null"],
+          "description": "Canonical extracted fields, verbatim."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

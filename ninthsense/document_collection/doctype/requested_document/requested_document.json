@@ -1,0 +1,175 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-10-07 10:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "document_type",
+  "document_code",
+  "is_requested",
+  "is_mandatory",
+  "allowed_file_types",
+  "max_file_size_mb",
+  "help_text",
+  "display_group",
+  "staged_file",
+  "staged_file_name",
+  "staged_file_size_bytes",
+  "staged_verification_document_id",
+  "staged_on",
+  "file",
+  "file_name",
+  "file_size_bytes",
+  "verification_document_id",
+  "detected_document_type",
+  "is_detected_type_expected",
+  "is_low_confidence",
+  "verification_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "options": "Employee Document Type"
+  },
+  {
+   "fieldname": "document_code",
+   "fieldtype": "Data",
+   "label": "Document Code",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "description": "Cleared when a resend's template no longer asks for this document. The row keeps the earlier delivery until the next one replaces it.",
+   "fieldname": "is_requested",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Requested",
+   "read_only": 1
+  },
+  {
+   "fieldname": "is_mandatory",
+   "fieldtype": "Check",
+   "label": "Is Mandatory",
+   "read_only": 1
+  },
+  {
+   "fieldname": "allowed_file_types",
+   "fieldtype": "Data",
+   "label": "Allowed File Types",
+   "read_only": 1
+  },
+  {
+   "fieldname": "max_file_size_mb",
+   "fieldtype": "Int",
+   "label": "Max File Size (MB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "help_text",
+   "fieldtype": "Small Text",
+   "label": "Help Text",
+   "read_only": 1
+  },
+  {
+   "fieldname": "display_group",
+   "fieldtype": "Data",
+   "label": "Display Group",
+   "read_only": 1
+  },
+  {
+   "fieldname": "staged_file",
+   "fieldtype": "Attach",
+   "hidden": 1,
+   "label": "Staged File"
+  },
+  {
+   "fieldname": "staged_file_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Staged File Name"
+  },
+  {
+   "fieldname": "staged_file_size_bytes",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Staged File Size Bytes"
+  },
+  {
+   "fieldname": "staged_verification_document_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Staged Verification Document Id"
+  },
+  {
+   "fieldname": "staged_on",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "Staged On"
+  },
+  {
+   "fieldname": "file",
+   "fieldtype": "Attach",
+   "label": "File",
+   "read_only": 1
+  },
+  {
+   "fieldname": "file_name",
+   "fieldtype": "Data",
+   "label": "File Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "file_size_bytes",
+   "fieldtype": "Int",
+   "label": "File Size Bytes",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_document_id",
+   "fieldtype": "Data",
+   "label": "Verification Document Id",
+   "read_only": 1
+  },
+  {
+   "fieldname": "detected_document_type",
+   "fieldtype": "Data",
+   "label": "Detected Document Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "is_detected_type_expected",
+   "fieldtype": "Check",
+   "label": "Is Detected Type Expected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "is_low_confidence",
+   "fieldtype": "Check",
+   "label": "Is Low Confidence",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_status",
+   "fieldtype": "Data",
+   "label": "Verification Status",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-10-08 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Document Collection",
+ "name": "Requested Document",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
