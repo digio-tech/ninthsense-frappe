@@ -3,7 +3,7 @@ app_title = "9thSense Onboarding"
 app_publisher = "Digio Labs"
 app_description = "9thSense employee onboarding: collect documents from a candidate and fill the Employee"
 app_email = "digio-labs@digio.in"
-app_license = "unlicense"
+app_license = "mit"
 
 # Never list frappe here: the pilot validator rejects it (R16).
 required_apps = ["erpnext", "hrms"]
